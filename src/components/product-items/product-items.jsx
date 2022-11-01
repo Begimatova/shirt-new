@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 export const ProductItems = ({
 	imageUrl,
 	name,
@@ -8,6 +10,8 @@ export const ProductItems = ({
 	rating,
 }) => {
 	const typeNames = ['cotton', 'synthetics']
+	const [activeType, setActiveType] = useState('')
+	const [activeSize, setActiveSize] = useState('')
 
 	return (
 		<div className='tshirt-block'>
@@ -16,12 +20,24 @@ export const ProductItems = ({
 			<div className='tshirt-block__selector'>
 				<ul>
 					{types.map(typeId => (
-						<li>{typeNames[typeId]}</li>
+						<li
+							className={activeType === typeId ? 'active' : ''}
+							key={typeId}
+							onClick={() => setActiveType(typeId)}
+						>
+							{typeNames[typeId]}
+						</li>
 					))}
 				</ul>
 				<ul>
 					{sizes.map(s => (
-						<li>{s}</li>
+						<li
+							key={s}
+							className={activeSize === s ? 'active' : ''}
+							onClick={() => setActiveSize(s)}
+						>
+							{s}
+						</li>
 					))}
 				</ul>
 			</div>
