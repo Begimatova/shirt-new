@@ -4,6 +4,7 @@ import { Sort } from '../components/sort/sort'
 import { data } from '../t.js'
 
 export const Products = () => {
+	const URL = 'https://635fd2b7ca0fe3c21aa582a0.mockapi.io/products'
 	return (
 		<>
 			<div className='content__top'>

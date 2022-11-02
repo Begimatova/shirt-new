@@ -33,10 +33,10 @@ export const Header = () => {
 						</a>
 					</li>
 					<li>
-						<a href='/' className='header__cart__price'>
+						<Link to='/cart' className='header__cart__price'>
 							<BsCart2 width={16} hanging={16} />
 							<span>0</span>
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</div>
