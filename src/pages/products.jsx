@@ -4,26 +4,32 @@ import { ProductItems } from '../components/product-items/product-items'
 import { Sort } from '../components/sort/sort'
 import { Skeleton } from '../components/product-items/skeleton'
 
-const URL = 'https://635fd285ca0fe3c21aa57c91.mockapi.io/products'
+const URL = 'https://635fd285ca0fe3c21aa57c91.mockapi.io/products?category='
 
 export const Products = () => {
 	const [loading, setLoading] = useState(true)
 	const [items, setItems] = useState([])
+	const [activeCategory, setActiveCategory] = useState(0)
+	const [activeSort, setActiveSort] = useState(0)
 
 	useEffect(() => {
-		fetch(URL)
+		setLoading(true)
+		fetch((URL + activeCategory) & activeSort)
 			.then(arr => arr.json())
 			.then(data => {
 				setItems(data)
 				setLoading(false)
 			})
-	}, [])
+	}, [activeCategory, activeSort])
 
 	return (
 		<>
 			<div className='content__top'>
-				<Categories />
-				<Sort />
+				<Categories
+					value={activeCategory}
+					onChangeCategory={i => setActiveCategory(i)}
+				/>
+				<Sort sortValue={activeSort} onChangeSort={i => setActiveSort(i)} />
 			</div>
 			<h2
 				className='content__title'

@@ -36,6 +36,9 @@
 	}
 
 	&__cart {
+		@media all and (max-width: 430px) {
+			display: none;
+		}
 		display: flex;
 		align-items: center;
 		gap: 20px;
