@@ -1,13 +1,16 @@
 import { useState } from 'react'
-const sortOptions = ['popularity', 'price', 'alphabetically']
-export const Sort = () => {
-	const [activeOption, setActiveOption] = useState(sortOptions[0])
-	const [activePopup, setActivePopup] = useState(false)
 
-	const sortBy = option => {
-		setActiveOption(option)
-		setActivePopup(false)
+export const Sort = () => {
+	const [opened, setOpened] = useState(false)
+	const [activeSort, setActiveSort] = useState(0)
+	const sortList = ['popularity', 'price', 'alphabetically']
+	const sortName = sortList[activeSort]
+
+	const setOpenedListItem = i => {
+		setActiveSort(i)
+		setOpened(false)
 	}
+
 	return (
 		<div className='sort'>
 			<div className='sort__label' onClick={() => setActivePopup(!activePopup)}>
@@ -25,18 +28,18 @@ export const Sort = () => {
 					/>
 				</svg>
 				<b>Sorting by:</b>
-				<span>{activeOption}</span>
+				<span onClick={() => setOpened(!opened)}>{sortName}</span>
 			</div>
-			{activePopup && (
+			{opened && (
 				<div className='sort__popup'>
 					<ul>
-						{sortOptions.map(option => (
+						{sortList.map((sort, i) => (
 							<li
-								className={activeOption === option ? 'active' : ''}
-								key={option}
-								onClick={() => sortBy(option)}
+								key={sort}
+								onClick={() => setOpenedListItem(i)}
+								className={activeSort === i ? 'active' : ''}
 							>
-								{option}
+								{sort}
 							</li>
 						))}
 					</ul>

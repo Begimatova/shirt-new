@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Header } from './components/header/header'
 import { Products } from './pages/products'
 import { Home } from './pages/home'
-import { NotFound } from './pages/notFound'
-import { Cart } from './pages/cart'
+import { NotFound } from './pages/not-found'
 
 export const App = () => {
 	return (
@@ -16,7 +15,6 @@ export const App = () => {
 						<Route path='/' element={<Home />} />
 						<Route path='/products' element={<Products />} />
 						<Route path='*' element={<NotFound />} />
-						<Route path='/cart' element={<Cart />} />
 					</Routes>
 				</div>
 			</div>
