@@ -1,17 +1,10 @@
 import { useState } from 'react'
 
-export const ProductItems = ({
-	imageUrl,
-	name,
-	types,
-	sizes,
-	price,
-	category,
-	rating,
-}) => {
+export const ProductItems = ({ name, price, imageUrl, types, sizes }) => {
+	const [activeType, setActiveType] = useState()
+	const [activeSize, setActiveSize] = useState()
+
 	const typeNames = ['cotton', 'synthetics']
-	const [activeType, setActiveType] = useState('')
-	const [activeSize, setActiveSize] = useState('')
 
 	return (
 		<div className='tshirt-block'>
@@ -21,22 +14,20 @@ export const ProductItems = ({
 				<ul>
 					{types.map(typeId => (
 						<li
-							className={activeType === typeId ? 'active' : ''}
-							key={typeId}
 							onClick={() => setActiveType(typeId)}
+							className={activeType === typeId ? 'active' : ''}
 						>
 							{typeNames[typeId]}
 						</li>
 					))}
 				</ul>
 				<ul>
-					{sizes.map(s => (
+					{sizes.map((size, i) => (
 						<li
-							key={s}
-							className={activeSize === s ? 'active' : ''}
-							onClick={() => setActiveSize(s)}
+							onClick={() => setActiveSize(i)}
+							className={activeSize === i ? 'active' : ''}
 						>
-							{s}
+							{size}
 						</li>
 					))}
 				</ul>
