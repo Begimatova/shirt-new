@@ -4,17 +4,37 @@ import { ProductItems } from '../components/product-items/product-items'
 import { Sort } from '../components/sort/sort'
 import { Skeleton } from '../components/product-items/skeleton'
 
-const URL = 'https://635fd285ca0fe3c21aa57c91.mockapi.io/products?category='
+const URL = 'https://635fd2b7ca0fe3c21aa582a0.mockapi.io/products?'
+const sortList = ['popularity', 'price', 'alphabetically']
+
+const SORT_NAMES = {
+	popularity: 'rating',
+	price: 'price',
+	alphabetically: 'name',
+}
+const SORT_DIRECTION = {
+	popularity: 'desc',
+	price: 'asc',
+	alphabetically: 'asc',
+}
 
 export const Products = () => {
 	const [loading, setLoading] = useState(true)
 	const [items, setItems] = useState([])
 	const [activeCategory, setActiveCategory] = useState(0)
-	const [activeSort, setActiveSort] = useState(0)
+	const [activeSort, setActiveSort] = useState(sortList[0])
 
 	useEffect(() => {
 		setLoading(true)
-		fetch((URL + activeCategory) & activeSort)
+
+		const queryParams = new URLSearchParams()
+		queryParams.append('sortBy', SORT_NAMES[activeSort])
+		queryParams.append('order', SORT_DIRECTION[activeSort])
+		if (activeCategory > 0) {
+			queryParams.append('category', activeCategory)
+		}
+
+		fetch(URL + queryParams)
 			.then(arr => arr.json())
 			.then(data => {
 				setItems(data)

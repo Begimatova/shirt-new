@@ -4,7 +4,7 @@ export const Sort = ({ sortValue, onChangeSort }) => {
 	const [opened, setOpened] = useState(false)
 
 	const sortList = ['popularity', 'price', 'alphabetically']
-	const sortName = sortList[sortValue]
+	// const sortName = sortList[sortValue]
 
 	const setOpenedListItem = i => {
 		onChangeSort(i)
@@ -28,16 +28,16 @@ export const Sort = ({ sortValue, onChangeSort }) => {
 					/>
 				</svg>
 				<b>Sorting by:</b>
-				<span onClick={() => setOpened(!opened)}>{sortName}</span>
+				<span onClick={() => setOpened(!opened)}>{sortValue}</span>
 			</div>
 			{opened && (
 				<div className='sort__popup'>
 					<ul>
-						{sortList.map((sort, i) => (
+						{sortList.map(sort => (
 							<li
 								key={sort}
-								onClick={() => setOpenedListItem(i)}
-								className={sortValue === i ? 'active' : ''}
+								onClick={() => setOpenedListItem(sort)}
+								className={sortValue === sort ? 'active' : ''}
 							>
 								{sort}
 							</li>
